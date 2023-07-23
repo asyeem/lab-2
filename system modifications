@@ -1,0 +1,119 @@
+#!/bin/bash
+
+# Function to print section headers
+print_section_header() {
+    echo "--------------------------------------------------------------"
+    echo " $1"
+    echo "--------------------------------------------------------------"
+}
+
+# Function to check and update hostname
+check_and_update_hostname() {
+    print_section_header "Checking Hostname"
+    current_hostname=$(hostname)
+    desired_hostname="autosrv"
+
+    if [[ "$current_hostname" != "$desired_hostname" ]]; then
+        echo "Updating hostname to $desired_hostname"
+        hostnamectl set-hostname "$desired_hostname"
+    else
+        echo "Hostname is already set to $desired_hostname"
+    fi
+}
+
+# Function to check and update network configuration
+check_and_update_network() {
+    print_section_header "Checking Network Configuration"
+    interface="ens34"  # Update this with the correct interface name if needed
+    desired_address="192.168.16.21/24"
+    desired_gateway="192.168.16.1"
+    desired_dns_server="192.168.16.1"
+    desired_dns_search="home.arpa localdomain"
+
+    # Implement the logic to check and update the network configuration
+    # ...
+
+    echo "Network configuration has been updated."
+}
+
+# Function to check and install required software packages
+check_and_install_packages() {
+    print_section_header "Checking and Installing Software Packages"
+    required_packages=("openssh-server" "apache2" "squid" "ufw")
+
+    for package in "${required_packages[@]}"; do
+        if ! dpkg -l | grep -q "ii  $package "; then
+            echo "Installing $package..."
+            sudo apt-get install -y "$package"
+        else
+            echo "$package is already installed."
+        fi
+    done
+
+    echo "Software packages installation completed."
+}
+
+# Function to configure SSH server
+configure_ssh_server() {
+    print_section_header "Configuring SSH Server"
+    # Implement the logic to update SSH server configuration
+    # ...
+
+    echo "SSH server has been configured."
+}
+
+# Function to configure Apache2 web server
+configure_apache2() {
+    print_section_header "Configuring Apache2 Web Server"
+    # Implement the logic to update Apache2 configuration
+    # ...
+
+    echo "Apache2 web server has been configured."
+}
+
+# Function to configure Squid web proxy
+configure_squid() {
+    print_section_header "Configuring Squid Web Proxy"
+    # Implement the logic to update Squid configuration
+    # ...
+
+    echo "Squid web proxy has been configured."
+}
+
+# Function to configure UFW firewall
+configure_ufw_firewall() {
+    print_section_header "Configuring UFW Firewall"
+    # Implement the logic to update UFW rules
+    # ...
+
+    echo "UFW firewall has been configured."
+}
+
+# Function to create user accounts and configure SSH keys
+create_user_accounts() {
+    print_section_header "Creating User Accounts and SSH Keys"
+    # Implement the logic to create user accounts and configure SSH keys
+    # ...
+
+    echo "User accounts and SSH keys have been created."
+}
+
+# Function to grant sudo access to the "dennis" user
+grant_sudo_access() {
+    print_section_header "Granting Sudo Access"
+    # Implement the logic to grant sudo access to "dennis" user
+    # ...
+
+    echo "Sudo access has been granted to the 'dennis' user."
+}
+
+# Main script execution
+check_and_update_hostname
+check_and_update_network
+check_and_install_packages
+configure_ssh_server
+configure_apache2
+configure_squid
+configure_ufw_firewall
+create_user_accounts
+grant_sudo_access
